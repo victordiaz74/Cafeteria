@@ -2,7 +2,6 @@ package aad.cafeteriagoya.adapter
 
 import aad.cafeteriagoya.R
 import aad.cafeteriagoya.entidades.Producto
-import android.net.Uri
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -16,7 +15,7 @@ class ProductoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val imagenView = itemView.findViewById<ImageView>(R.id.imgProducto)
         var textViewProducto = itemView.findViewById<TextView>(R.id.textoProducto)
         var textViewPrecio = itemView.findViewById<TextView>(R.id.precioProducto)
-        var button = itemView.findViewById<Button>(R.id.buttonAnadir)
+        var button = itemView.findViewById<Button>(R.id.btnBorrar)
 
         fun render(producto: Producto,anadirProducto: (Producto) -> Unit) {
 

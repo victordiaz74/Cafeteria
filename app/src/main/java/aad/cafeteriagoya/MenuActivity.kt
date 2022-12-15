@@ -1,15 +1,21 @@
 package aad.cafeteriagoya
 
 import aad.cafeteriagoya.DataProvider.Companion.listaProductos
+import aad.cafeteriagoya.R.id.fragmentContainerView
 import aad.cafeteriagoya.adapter.MenuAdaptador
 import aad.cafeteriagoya.databinding.ActivityMenuBinding
 import aad.cafeteriagoya.entidades.Producto
+import aad.cafeteriagoya.fragments.CarritoFragment
+import aad.cafeteriagoya.fragments.CarritoViewModel
+import aad.cafeteriagoya.fragments.MenuFragment
 import aad.cafeteriagoya.sqlite.MiBDOpenHelper
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 
 class MenuActivity : AppCompatActivity() {
@@ -18,6 +24,7 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var hora:String
     private lateinit var productosBDHelper: MiBDOpenHelper
     private lateinit var adaptador: MenuAdaptador
+    private val carritoViewModel: CarritoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,65 +34,55 @@ class MenuActivity : AppCompatActivity() {
 
         productosBDHelper = MiBDOpenHelper(this, null)
 
-        rellenarSpinner()
-        initRecyclerView()
+        carritoViewModel.setDatabase(productosBDHelper)
 
         hora = intent.getStringExtra("hora").toString()
 
         binding.btCarrito.setOnClickListener {
-            siguiente()
+            mostrarFragmentoCarrito()
         }
 
-        binding.btFiltrar.setOnClickListener{
-            filtrar()
+        binding.btMenu.setOnClickListener {
+            mostrarFragmentoMenu()
         }
 
-    }
 
+        val nameObserver = Observer<Double>{
+            //Actualizar la UI porque es un TextView
+                valor -> binding!!.textoPuntosMarcador?.setText(valor.toString())
 
-    fun filtrar() {
-
-        val categoria = binding.spinner.selectedItem.toString()
-
-        val lista = mutableListOf<Producto>()
-
-        if (categoria != "Todas") {
-            for (p in DataProvider.listaProductos) {
-                if (p.categoria == categoria) {
-                    lista.add(p)
-                }
-            }
-            adaptador.listaProductos = lista
-        } else {
-            adaptador.listaProductos = DataProvider.listaProductos
         }
-        adaptador.notifyDataSetChanged()
-    }
-
-    fun rellenarSpinner() {
-
-        val categorias = arrayOf("Todas", "pincho", "cafe", "refresco", "bocadillo")
-
-        var adaptador: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_spinner_item, categorias)
-        binding.spinner.adapter = adaptador
+        carritoViewModel.getMarcador().observe(this, nameObserver)
 
     }
 
-    fun initRecyclerView() {
+    private fun mostrarFragmentoCarrito() {
+        //se establece la transaccion entre fragments
+        val transaction= fragmentManager?.beginTransaction()
+        //se instancia el fragment al que vamos a cambiar
+        val fragmentoCarrito = CarritoFragment()
 
-        adaptador = MenuAdaptador(
-            listaProductos = DataProvider.listaProductos,
-            anadirProducto = { producto -> anadirProducto(producto) })
-
-        binding.recyclerView.adapter = adaptador
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-
+        //se indica el elemento R al que se cambia
+        transaction?.replace(fragmentContainerView,fragmentoCarrito)
+        transaction?.addToBackStack(null)
+        //se muestra el fragment
+        transaction?.commit()
     }
 
-    fun anadirProducto(p: Producto) {
-        productosBDHelper.anadirProducto(p)
-        Toast.makeText(this, p.nombre + "ha sido añadido", Toast.LENGTH_SHORT).show();
+    private fun mostrarFragmentoMenu() {
+        //se establece la transaccion entre fragments
+        val transaction= fragmentManager?.beginTransaction()
+        //se instancia el fragment al que vamos a cambiar
+        val fragmentoMenu = MenuFragment()
+
+        //se indica el elemento R al que se cambia
+        transaction?.replace(fragmentContainerView,fragmentoMenu)
+        transaction?.addToBackStack(null)
+        //se muestra el fragment
+        transaction?.commit()
     }
+
+
 
     fun siguiente(){
         intent = Intent(this, CarritoActivity::class.java).apply {
