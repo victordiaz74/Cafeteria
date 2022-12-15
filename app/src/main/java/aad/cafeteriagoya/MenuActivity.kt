@@ -58,7 +58,7 @@ class MenuActivity : AppCompatActivity() {
 
     private fun mostrarFragmentoCarrito() {
         //se establece la transaccion entre fragments
-        val transaction= fragmentManager?.beginTransaction()
+        val transaction= supportFragmentManager.beginTransaction()
         //se instancia el fragment al que vamos a cambiar
         val fragmentoCarrito = CarritoFragment()
 
@@ -71,7 +71,7 @@ class MenuActivity : AppCompatActivity() {
 
     private fun mostrarFragmentoMenu() {
         //se establece la transaccion entre fragments
-        val transaction= fragmentManager?.beginTransaction()
+        val transaction= supportFragmentManager?.beginTransaction()
         //se instancia el fragment al que vamos a cambiar
         val fragmentoMenu = MenuFragment()
 
