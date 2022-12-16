@@ -24,12 +24,7 @@ class MenuFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        rellenarSpinner()
-        initRecyclerView()
 
-        binding?.btFiltrar?.setOnClickListener{
-            filtrar()
-        }
     }
 
     override fun onCreateView(
@@ -40,6 +35,13 @@ class MenuFragment : Fragment() {
         productosBDHelper = carritoViewModel.getDatabase()!!
         val fragmentoBinding = FragmentMenuBinding.inflate(inflater, container, false)
         binding = fragmentoBinding
+
+        rellenarSpinner()
+        initRecyclerView()
+
+        binding?.btFiltrar?.setOnClickListener{
+            filtrar()
+        }
 
         return fragmentoBinding.root
     }

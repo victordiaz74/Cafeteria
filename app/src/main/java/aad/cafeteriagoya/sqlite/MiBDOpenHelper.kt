@@ -80,4 +80,22 @@ class MiBDOpenHelper(contex: Context, factory: SQLiteDatabase.CursorFactory?) :
         return lista
     }
 
+    fun aniadirProducto(productos: String) {
+        val db = this.writableDatabase
+
+        var insercion = "INSERT INTO $T_PRODUCTOS(${T_PRODUCTOS}) VALUES($productos);"
+
+        db!!.execSQL(insercion)
+
+        db.close()
+    }
+
+    fun obtenerCarrito(): Cursor
+    {
+        val db = this.readableDatabase
+        var cursor = db.rawQuery("SELECT * FROM ${MiBDOpenHelper.T_PRODUCTOS}", null)
+
+        return cursor
+    }
+
 }

@@ -10,7 +10,7 @@
         android:id="@+id/spinner"
         android:layout_width="290dp"
         android:layout_height="53dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toStartOf="@+id/btFiltrar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,7 +19,7 @@
         android:id="@+id/btFiltrar"
         android:layout_width="100dp"
         android:layout_height="53dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="50dp"
         android:text="Filtrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/spinner"

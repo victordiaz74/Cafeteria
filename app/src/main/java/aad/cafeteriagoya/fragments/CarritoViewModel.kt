@@ -1,5 +1,6 @@
 package aad.cafeteriagoya.fragments
 
+import aad.cafeteriagoya.entidades.Producto
 import aad.cafeteriagoya.sqlite.MiBDOpenHelper
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
@@ -8,24 +9,28 @@ import androidx.lifecycle.ViewModel
 class CarritoViewModel: ViewModel() {
 
     private var productosDBHelper: MiBDOpenHelper ?= null
-    private var marcador: MutableLiveData<Double>
-    private var contexto: Context? = null
+    private var marcador: MutableLiveData<String> = MutableLiveData<String>()
+    lateinit var contexto: Context
+    var precioTotal: Double = 0.0
+    var carrito = ArrayList<Producto>()
 
-    init {
-        marcador = MutableLiveData<Double>()
+    init{
+        marcador.setValue("$precioTotal€")
     }
 
     fun setMarcador(){
-        var aux: Double = marcador.value?: 0.0
-        //añadir precio producto
-        //marcador.setValue(aux + 1.0)
+        precioTotal = 0.0
+
+        for(p in carrito)
+        {
+            precioTotal += p.precio
+        }
+
+        marcador.value = "Total: $precioTotal€"
 
     }
 
-    fun getMarcador(): MutableLiveData<Double>{
-        if(marcador == null){
-
-        }
+    fun getMarcador(): MutableLiveData<String>{
         return marcador
     }
 
@@ -38,10 +43,10 @@ class CarritoViewModel: ViewModel() {
     }
 
     fun getContext(): Context{
-        return contexto!!
+        return contexto
     }
 
-    fun setContext(){
-
+    fun setContext(contexto: Context){
+        this.contexto = contexto
     }
 }

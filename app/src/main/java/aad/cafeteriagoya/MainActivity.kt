@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         if(binding.tvTiempo.text.equals("")) {
             Toast.makeText(this, "Introduce una hora", Toast.LENGTH_SHORT).show()
         }else{
-            intent = Intent(this, MenuActivity::class.java).apply {
+            intent = Intent(this, FragmentoActivity::class.java).apply {
                 putExtra("hora", binding.tvTiempo.text.toString())
             }
 
