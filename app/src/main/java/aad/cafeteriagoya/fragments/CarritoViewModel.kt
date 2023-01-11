@@ -15,7 +15,7 @@ class CarritoViewModel: ViewModel() {
     var carrito = ArrayList<Producto>()
 
     init{
-        marcador.setValue("$precioTotal€")
+        marcador.value = "$precioTotal€"
     }
 
     fun setMarcador(){
