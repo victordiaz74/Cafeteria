@@ -82,9 +82,7 @@ class CarritoFragment : Fragment() {
             Toast.makeText(carritoViewModel.getContext(), "El pago se ha procesado", Toast.LENGTH_SHORT).show()
         }
 
-        var intent = Intent(carritoViewModel.getContext(), MainActivity:: class.java)
-
-        startActivity(intent)
+        irInicio()
     }
 
     fun irInicio(){

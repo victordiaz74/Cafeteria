@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools2="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="80dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/apk/res-auto">
 
 
-<ImageView
-        android:id="@+id/imgProducto"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardListaProducto"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:background="@color/black" />
+        app:cardBackgroundColor="#FFFF99"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="true"
+>
 
-    <TextView
-        android:id="@+id/textoProducto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:text="nombreProducto"
+        <TextView
+            android:id="@+id/textoProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nombreProducto"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="50dp"
 
-        app:layout_constraintLeft_toLeftOf="@id/imgProducto"
-        app:layout_constraintStart_toEndOf="@+id/imgProducto"
-        app:layout_constraintTop_toTopOf="parent" />
+            />
 
-    <TextView
-        android:id="@+id/precioProducto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        <TextView
+            android:id="@+id/precioProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="precio"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="50dp"
+            />
 
-        android:text="precio"
-        app:layout_constraintLeft_toLeftOf="@id/imgProducto"
-        app:layout_constraintStart_toEndOf="@+id/imgProducto"
-        app:layout_constraintTop_toBottomOf="@+id/textoProducto" />
-
-    <Button
-        android:id="@+id/btnEliminar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="4dp"
-        android:backgroundTint="@color/teal_700"
-        android:text="Borrar"
-        app:layout_constraintBottom_toBottomOf="@+id/imgProducto"
-        app:layout_constraintRight_toRightOf="parent" />
-
+        <Button
+            android:id="@+id/btnEliminar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/teal_700"
+            android:text="Borrar"
+            android:layout_marginLeft="220dp"
+            />
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
