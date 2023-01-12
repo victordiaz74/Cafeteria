@@ -21,12 +21,11 @@ class CarritoViewModel: ViewModel() {
     fun setMarcador(){
         precioTotal = 0.0
 
-        for(p in carrito)
-        {
+        for(p in carrito) {
             precioTotal += p.precio
         }
 
-        marcador.value = "Total: $precioTotal€"
+        marcador.value = "$precioTotal€"
 
     }
 

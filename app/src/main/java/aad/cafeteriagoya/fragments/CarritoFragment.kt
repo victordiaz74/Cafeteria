@@ -13,6 +13,7 @@ import aad.cafeteriagoya.databinding.FragmentMenuBinding
 import aad.cafeteriagoya.entidades.Producto
 import aad.cafeteriagoya.sqlite.MiBDOpenHelper
 import android.content.Intent
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -28,7 +29,6 @@ class CarritoFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,10 +37,10 @@ class CarritoFragment : Fragment() {
         productoBDHelper = carritoViewModel.getDatabase()!!
         val fragmentoBinding = FragmentCarritoBinding.inflate(inflater, container, false)
         binding = fragmentoBinding
-
-
         cargar()
-
+        binding?.btInicio?.setOnClickListener(){
+            pagar()
+        }
 
         return fragmentoBinding.root
     }
@@ -61,6 +61,8 @@ class CarritoFragment : Fragment() {
     fun dameID(pos: Producto) {
         carritoViewModel.carrito.remove(pos)
 
+        carritoViewModel.setMarcador()
+
         cargar()
     }
 
@@ -71,9 +73,14 @@ class CarritoFragment : Fragment() {
             productoSeleccionado = productoSeleccionado + "-" + p.id
         }
 
+        productoSeleccionado = productoSeleccionado.substring(productoSeleccionado.length-1)
         var base = carritoViewModel.getDatabase()
 
-        base?.aniadirProducto(productoSeleccionado)
+        if (carritoViewModel.carrito.size > 0){
+            base?.aniadirProducto(productoSeleccionado)
+
+            Toast.makeText(carritoViewModel.getContext(), "El pago se ha procesado", Toast.LENGTH_SHORT).show()
+        }
 
         var intent = Intent(carritoViewModel.getContext(), MainActivity:: class.java)
 

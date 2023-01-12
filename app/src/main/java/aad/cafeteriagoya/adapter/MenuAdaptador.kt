@@ -7,8 +7,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class MenuAdaptador(var listaProductos: List<Producto>,
-                    private val anadirProducto: (Producto) -> Unit,): RecyclerView.Adapter<ProductoViewHolder>(){
+class MenuAdaptador(private val onClickListener: (Int) -> Unit): RecyclerView.Adapter<ProductoViewHolder>(){
+
+    private lateinit var context: Context
+    lateinit var listaProductos: ArrayList<Producto>
+
+    fun MenuAdaptador(context: Context, listaProductos: ArrayList<Producto>) {
+        this.context = context
+        this.listaProductos = listaProductos
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
         val layoutInflater= LayoutInflater.from(parent.context)
@@ -16,8 +23,7 @@ class MenuAdaptador(var listaProductos: List<Producto>,
     }
 
     override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
-        val item = listaProductos[position]
-        holder.render(item,anadirProducto)
+        holder.render(listaProductos[position], onClickListener)
     }
 
     override fun getItemCount(): Int {

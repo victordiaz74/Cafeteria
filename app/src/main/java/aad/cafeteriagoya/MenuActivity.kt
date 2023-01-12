@@ -18,6 +18,7 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var hora:String
     private lateinit var productosBDHelper: MiBDOpenHelper
     private lateinit var adaptador: MenuAdaptador
+    var lista: ArrayList<Producto> = ArrayList(DataProvider.listaProductos)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,9 +56,9 @@ class MenuActivity : AppCompatActivity() {
                     lista.add(p)
                 }
             }
-            adaptador.listaProductos = lista
+            adaptador.listaProductos = ArrayList(lista)
         } else {
-            adaptador.listaProductos = DataProvider.listaProductos
+            adaptador.listaProductos = ArrayList(listaProductos)
         }
         adaptador.notifyDataSetChanged()
     }
@@ -73,18 +74,20 @@ class MenuActivity : AppCompatActivity() {
 
     fun initRecyclerView() {
 
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+
         adaptador = MenuAdaptador(
-            listaProductos = DataProvider.listaProductos,
-            anadirProducto = { producto -> anadirProducto(producto) })
+            onClickListener = {pos -> dameID(pos)} )
+
+        adaptador.MenuAdaptador(this, lista)
 
         binding.recyclerView.adapter = adaptador
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+
 
     }
 
-    fun anadirProducto(p: Producto) {
-        productosBDHelper.anadirProducto(p)
-        Toast.makeText(this, p.nombre + "ha sido añadido", Toast.LENGTH_SHORT).show();
+    fun dameID(pos: Int) {
+        //base?.andirProducto(listaProductos[pos-1])
     }
 
     fun siguiente(){

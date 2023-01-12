@@ -19,6 +19,7 @@ class MenuFragment : Fragment() {
 
     private lateinit var productosBDHelper: MiBDOpenHelper
     private val carritoViewModel: CarritoViewModel by activityViewModels()
+    var lista: ArrayList<Producto> = ArrayList(DataProvider.listaProductos)
     private var binding: FragmentMenuBinding ?= null
     private lateinit var adaptador: MenuAdaptador
 
@@ -60,9 +61,9 @@ class MenuFragment : Fragment() {
                     lista.add(p)
                 }
             }
-            adaptador.listaProductos = lista
+            adaptador.listaProductos = ArrayList(lista)
         } else {
-            adaptador.listaProductos = DataProvider.listaProductos
+            adaptador.listaProductos = ArrayList(DataProvider.listaProductos)
         }
         adaptador.notifyDataSetChanged()
     }
@@ -78,18 +79,24 @@ class MenuFragment : Fragment() {
 
     fun initRecyclerView() {
 
-        adaptador = MenuAdaptador(
-            listaProductos = DataProvider.listaProductos,
-            anadirProducto = { producto -> anadirProducto(producto) })
+        val recyclerView = binding?.recyclerView
+        recyclerView?.layoutManager = LinearLayoutManager(carritoViewModel.getContext())
 
-        binding?.recyclerView?.adapter = adaptador
-        binding?.recyclerView?.layoutManager = LinearLayoutManager(carritoViewModel.getContext())
+        adaptador = MenuAdaptador(
+            onClickListener = { pos -> dameID(pos) }
+        )
+        adaptador.MenuAdaptador(carritoViewModel.getContext(), lista)
+        /*adaptador = MenuAdaptador(
+            listaProductos = DataProvider.listaProductos,
+            anadirProducto = { producto -> anadirProducto(producto) })*/
+
+        recyclerView?.adapter = adaptador
 
     }
 
-    fun anadirProducto(p: Producto) {
-        productosBDHelper.anadirProducto(p)
-        //Toast.makeText(this, p.nombre + "ha sido añadido", Toast.LENGTH_SHORT).show();
+    fun dameID(pos: Int){
+        carritoViewModel.carrito.add(DataProvider.listaProductos.get(pos-1))
+        carritoViewModel.setMarcador()
     }
 
 }

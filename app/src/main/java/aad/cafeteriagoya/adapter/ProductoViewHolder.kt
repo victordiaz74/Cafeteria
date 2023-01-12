@@ -17,7 +17,7 @@ class ProductoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var textViewPrecio = itemView.findViewById<TextView>(R.id.precioProducto)
         var button = itemView.findViewById<Button>(R.id.btnEliminar)
 
-        fun render(producto: Producto,anadirProducto: (Producto) -> Unit) {
+        fun render(producto: Producto, onClickListener: (Int) -> Unit) {
 
             textViewProducto.text = producto.nombre
             textViewPrecio.text= producto.precio.toString()+" €"
@@ -36,7 +36,9 @@ class ProductoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
                     .fit().centerCrop().into(imagenView)
             }
 
-            button.setOnClickListener{anadirProducto(producto)}
+            button.setOnClickListener{
+                onClickListener(producto.id)
+            }
 
 
         }
