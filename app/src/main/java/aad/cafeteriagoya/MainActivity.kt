@@ -21,6 +21,10 @@ class MainActivity : AppCompatActivity() {
         binding.buttonMain.setOnClickListener{
             guardarHora()
         }
+
+        binding.buttonMain2.setOnClickListener{
+            misPedidos()
+        }
     }
 
 
@@ -36,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun misPedidos(){
+        intent = Intent(this, PedidosActivity::class.java)
+            startActivity(intent)
+
+    }
 
 }
 

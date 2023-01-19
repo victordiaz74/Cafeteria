@@ -38,7 +38,7 @@ class CarritoFragment : Fragment() {
         val fragmentoBinding = FragmentCarritoBinding.inflate(inflater, container, false)
         binding = fragmentoBinding
         cargar()
-        binding?.btInicio?.setOnClickListener(){
+        binding?.btnPagar?.setOnClickListener(){
             pagar()
         }
 
@@ -73,11 +73,11 @@ class CarritoFragment : Fragment() {
             productoSeleccionado = productoSeleccionado + "-" + p.id
         }
 
-        productoSeleccionado = productoSeleccionado.substring(productoSeleccionado.length-1)
+        productoSeleccionado = productoSeleccionado.substring(1)
         var base = carritoViewModel.getDatabase()
 
         if (carritoViewModel.carrito.size > 0){
-            base?.aniadirProducto(productoSeleccionado)
+            base?.anadirProducto(productoSeleccionado)
 
             Toast.makeText(carritoViewModel.getContext(), "El pago se ha procesado", Toast.LENGTH_SHORT).show()
         }

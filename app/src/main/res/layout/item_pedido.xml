@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardListaProducto"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="#FFFF99"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="true"
+        >
+
+        <TextView
+            android:id="@+id/numeroPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="numeroPedido"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="50dp"
+
+            />
+
+        <TextView
+            android:id="@+id/precioPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="precio"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="50dp"
+            />
+
+        <Button
+            android:id="@+id/btnVerPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/teal_700"
+            android:text="Ver pedido"
+            android:layout_marginLeft="220dp"
+            />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,7 +22,7 @@ class CarritoActivity : AppCompatActivity() {
         productosBDHelper = MiBDOpenHelper(this, null)
         contenidoCarrito()
 
-        binding.btInicio.setOnClickListener{
+        binding.btnPagar.setOnClickListener{
             intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
@@ -30,10 +30,15 @@ class CarritoActivity : AppCompatActivity() {
     }
 
     fun contenidoCarrito(){
-        var lista = productosBDHelper.listarProducto()
+        var bd = MiBDOpenHelper(this, null)
+        var cursor = bd.obtenerCarrito()
+
+        cursor.moveToFirst()
         var texto = ""
-        for ( p in lista){
-            texto += " "+p.nombre+" "+p.categoria+" "+p.precio+"\n"
+
+        while (!cursor.isAfterLast){
+            texto = texto + "\n" + cursor.getString(2) + cursor.getString(3) + "€"
+            cursor.moveToNext()
         }
         binding.textView2.text =texto
 

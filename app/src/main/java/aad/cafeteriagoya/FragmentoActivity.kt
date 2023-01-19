@@ -41,9 +41,7 @@ class FragmentoActivity : AppCompatActivity() {
 
 
         val nameObserver = Observer<String>{
-            //Actualizar la UI porque es un TextView
-                valor -> binding!!.textoPuntosMarcador?.setText(valor.toString())
-
+            valor -> binding!!.textoPuntosMarcador?.setText(valor.toString())
         }
         carritoViewModel.getMarcador().observe(this, nameObserver)
 
