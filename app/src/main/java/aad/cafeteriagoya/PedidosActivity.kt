@@ -13,7 +13,6 @@ class PedidosActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPedidosBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -31,9 +30,9 @@ class PedidosActivity : AppCompatActivity() {
     }
 
     fun volverCasa() {
-        intent = Intent(this, MainActivity::class.java).apply {
-            startActivity(intent)
-        }
+        intent = Intent(this, MainActivity::class.java)
+
+        startActivity(intent)
     }
 
     fun initRecyclerViewPedidos() {
@@ -41,7 +40,6 @@ class PedidosActivity : AppCompatActivity() {
         rv.layoutManager = LinearLayoutManager(this)
 
         val bd = MiBDOpenHelper(this, null)
-
         var listaPedidos = bd.obtenerCarrito()
 
         var adapterPedidos = PedidosAdapter(
@@ -55,7 +53,6 @@ class PedidosActivity : AppCompatActivity() {
         intent = Intent(this, VerPedidoActivity::class.java).apply {
             putExtra("id", pos)
         }
-
         startActivity(intent)
     }
 }

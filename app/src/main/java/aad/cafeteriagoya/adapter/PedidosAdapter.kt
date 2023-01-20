@@ -1,6 +1,7 @@
 package aad.cafeteriagoya.adapter
 
 import aad.cafeteriagoya.R
+import android.annotation.SuppressLint
 import android.content.Context
 import android.database.Cursor
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ class PedidosAdapter (private val onClickListener: (Int) -> Unit) : RecyclerView
     private lateinit var context: Context
     lateinit var cursor: Cursor
 
+    @SuppressLint("NotConstructor")
     fun PedidosAdapter(context: Context, cursor: Cursor){
         this.context = context
         this.cursor = cursor

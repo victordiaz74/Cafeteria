@@ -17,6 +17,7 @@ class VerPedidoActivity : AppCompatActivity() {
         var id = intent.getIntExtra("id", -1)
 
         mostrarPedido(id)
+
         setContentView(binding.root)
     }
 
@@ -26,14 +27,13 @@ class VerPedidoActivity : AppCompatActivity() {
 
         cursor.moveToFirst()
 
-        var finPos = cursor.getInt(0)
         var contenidoPos = cursor.getString(1)
 
         var contenido = contenidoPos.split("-")
         var cadena = ""
 
         for(c in contenido){
-            cadena = cadena + DataProvider.listaProductos.get(c.toInt())
+            cadena = cadena + DataProvider.listaProductos.get(c.toInt()-1)
         }
 
         binding.idPedido.text = id.toString()

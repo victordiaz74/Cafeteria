@@ -25,7 +25,7 @@ class MiBDOpenHelper(contex: Context, factory: SQLiteDatabase.CursorFactory?) :
         var crearTablaProductos = "CREATE TABLE $T_PRODUCTOS " +
                 "($PRODUCTO_INSERCION_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "$PRODUCTOS TEXT)"
-        var insercion_producto_prueba = "INSERT INTO $T_PRODUCTOS($PRODUCTOS) VALUES('0-0-0-0');"
+        var insercion_producto_prueba = "INSERT INTO $T_PRODUCTOS($PRODUCTOS) VALUES('1-1-1-1');"
         db!!.execSQL(crearTablaProductos)
         db.execSQL(insercion_producto_prueba)
     }

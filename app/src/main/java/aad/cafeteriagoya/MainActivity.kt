@@ -15,8 +15,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
 
         binding.buttonMain.setOnClickListener{
             guardarHora()
@@ -25,25 +23,27 @@ class MainActivity : AppCompatActivity() {
         binding.buttonMain2.setOnClickListener{
             misPedidos()
         }
+        setContentView(binding.root)
     }
 
 
     fun guardarHora() {
-        if(binding.tvTiempo.text.equals("")) {
+        var hora = binding.tvTiempo.text.toString()
+
+        if(hora.equals("")) {
             Toast.makeText(this, "Introduce una hora", Toast.LENGTH_SHORT).show()
-        }else{
+        }else {
             intent = Intent(this, FragmentoActivity::class.java).apply {
                 putExtra("hora", binding.tvTiempo.text.toString())
             }
-
             startActivity(intent)
         }
     }
 
     fun misPedidos(){
         intent = Intent(this, PedidosActivity::class.java)
-            startActivity(intent)
 
+        startActivity(intent)
     }
 
 }

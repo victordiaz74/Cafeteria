@@ -27,10 +27,10 @@ class PedidosViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var dinero = 0.0
 
         for(p in productos){
-            dinero += DataProvider.listaProductos[p.toInt()].precio
+            var l = p
+            dinero += DataProvider.listaProductos[p.toInt()-1].precio
         }
 
         return dinero.toString()
-
     }
 }
